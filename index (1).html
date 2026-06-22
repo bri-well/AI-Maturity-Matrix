@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-Readiness Self-Audit — Keywell.ai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-text-primary:#1f2024;
+  --color-text-secondary:#5b5e66;
+  --color-text-tertiary:#8a8d94;
+  --color-background-primary:#ffffff;
+  --color-background-secondary:#f4f4f2;
+  --color-border-tertiary:rgba(0,0,0,0.10);
+  --color-border-secondary:rgba(0,0,0,0.18);
+  --color-border-primary:rgba(0,0,0,0.30);
+  --color-background-danger:#fdecea;
+  --color-text-danger:#9b2f23;
+  --color-background-success:#e7f4ee;
+  --color-text-success:#1d6e56;
+  --border-radius-md:8px;
+  --border-radius-lg:12px;
+  --font-sans:'Work Sans',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --font-head:'Josefin Sans',var(--font-sans);
+  --brand-coral:#E8705A;
+  --brand-navy:#2D2F6E;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --color-text-primary:#eae9e4;
+    --color-text-secondary:#b3b2ab;
+    --color-text-tertiary:#84847d;
+    --color-background-primary:#1d1d1b;
+    --color-background-secondary:#26262a;
+    --color-border-tertiary:rgba(255,255,255,0.14);
+    --color-border-secondary:rgba(255,255,255,0.24);
+    --color-border-primary:rgba(255,255,255,0.34);
+    --color-background-danger:#3a1f1c;
+    --color-text-danger:#f0a59b;
+    --color-background-success:#13332b;
+    --color-text-success:#7fd8bd;
+  }
+  body{background:#161614;}
+}
+*{box-sizing:border-box}
+body{margin:0;background:#fafaf8;color:var(--color-text-primary);font-family:var(--font-sans);line-height:1.6}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px 56px}
+.rule{height:3px;background:var(--brand-coral)}
+header{padding:28px 0 8px}
+.eyebrow{font-family:var(--font-head);font-size:13px;font-weight:500;letter-spacing:3px;color:var(--brand-coral);text-transform:uppercase;margin:0 0 6px}
+h1{font-family:var(--font-head);font-weight:400;font-size:34px;line-height:1.1;margin:0 0 12px;color:var(--color-text-primary)}
+.lede{font-size:15px;color:var(--color-text-secondary);margin:0;max-width:60ch}
+.dot{transition:transform .35s ease}
+.halo{opacity:0;transition:opacity .3s}
+.halo.on{opacity:.5}
+@media (prefers-reduced-motion: no-preference){.halo.on{animation:pulse 1.9s ease-in-out infinite}}
+@keyframes pulse{0%,100%{opacity:.28}50%{opacity:.62}}
+svg{display:block;width:100%;height:auto;margin:8px 0 0}
+#summary{margin:14px 0;padding:12px 14px;border-radius:var(--border-radius-lg);font-size:14px}
+.toolbar{display:flex;gap:10px;margin:0 0 4px;flex-wrap:wrap}
+button{font-family:var(--font-sans);font-size:13px;padding:6px 14px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-primary);border-radius:var(--border-radius-md);cursor:pointer;transition:background .15s,transform .05s}
+button:hover{background:var(--color-background-secondary)}
+button:active{transform:scale(0.98)}
+.row{display:flex;align-items:center;gap:12px;padding:9px 0;border-top:0.5px solid var(--color-border-tertiary)}
+.chip{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex:none}
+.meta{flex:1;min-width:0}
+.nm{font-size:14px;color:var(--color-text-primary)}
+.ct{font-size:12px;color:var(--color-text-secondary)}
+.seg{display:inline-flex;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);overflow:hidden;flex:none}
+.seg button{border:none;border-radius:0;padding:5px 10px;font-size:12px;color:var(--color-text-secondary);border-right:0.5px solid var(--color-border-tertiary)}
+.seg button:last-child{border-right:none}
+.seg button.active{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500}
+footer{margin-top:32px;padding-top:16px;border-top:0.5px solid var(--color-border-tertiary);font-size:13px;color:var(--color-text-secondary)}
+.mark{font-family:var(--font-head);font-size:16px;color:var(--color-text-primary)}
+.mark span{color:var(--brand-coral)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+@media (max-width:560px){.row{flex-wrap:wrap}.seg{margin-left:38px}h1{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="rule"></div>
+<div class="wrap">
+<header>
+  <p class="eyebrow">AI-readiness self-audit</p>
+  <h1>Find the blocker.</h1>
+  <p class="lede">Set each governance item to where you actually are. Anything high-impact that isn't in place lands in the red corner and counts as a blocker between you and an AI tool in production.</p>
+</header>
+
+<h2 class="sr-only">Interactive AI-readiness matrix. Set each governance item to not in place, partial, or in place; high-impact items that are not in place are counted as blockers.</h2>
+
+<svg viewBox="0 0 680 330" role="img">
+<title>AI-readiness matrix: impact on production versus maturity</title>
+<desc>Six governance items plotted by impact (vertical) and maturity (horizontal). High-impact items set to "not in place" sit in the top-left blocker corner.</desc>
+<rect x="80" y="45" width="260" height="127" fill="#C0392B" opacity="0.10"/>
+<rect x="80" y="45" width="520" height="255" fill="none" stroke="var(--color-border-secondary)" stroke-width="0.5"/>
+<line x1="340" y1="45" x2="340" y2="300" stroke="var(--color-border-tertiary)" stroke-width="0.75" stroke-dasharray="4 4"/>
+<line x1="80" y1="172" x2="600" y2="172" stroke="var(--color-border-tertiary)" stroke-width="0.75" stroke-dasharray="4 4"/>
+<text x="88" y="62" font-size="12" fill="var(--color-text-tertiary)">Blockers</text>
+<text x="592" y="62" font-size="12" fill="var(--color-text-tertiary)" text-anchor="end">Table stakes</text>
+<text x="88" y="292" font-size="12" fill="var(--color-text-tertiary)">Future-proofing</text>
+<text x="592" y="292" font-size="12" fill="var(--color-text-tertiary)" text-anchor="end">Handled</text>
+<text x="12" y="58" font-size="11" fill="var(--color-text-secondary)">High impact</text>
+<text x="12" y="298" font-size="11" fill="var(--color-text-secondary)">Low impact</text>
+<text x="80" y="318" font-size="11" fill="var(--color-text-secondary)">Rarely in place</text>
+<text x="600" y="318" font-size="11" fill="var(--color-text-secondary)" text-anchor="end">Already in place</text>
+
+<g class="dot" id="g1" transform="translate(-120,0)"><circle class="halo" id="h1" cx="340" cy="75" r="20" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="75" r="12" fill="#C0392B"/><text x="340" y="75" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">1</text></g>
+<g class="dot" id="g3" transform="translate(120,0)"><circle class="halo" id="h3" cx="340" cy="110" r="20" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="110" r="12" fill="#C0392B"/><text x="340" y="110" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">3</text></g>
+<g class="dot" id="g5" transform="translate(-120,0)"><circle class="halo" id="h5" cx="340" cy="145" r="20" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="145" r="12" fill="#C0392B"/><text x="340" y="145" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">5</text></g>
+<g class="dot" id="g2" transform="translate(-120,0)"><circle class="halo" id="h2" cx="340" cy="170" r="20" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="170" r="12" fill="#D98324"/><text x="340" y="170" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#3A2406">2</text></g>
+<g class="dot" id="g4" transform="translate(0,0)"><circle class="halo" id="h4" cx="340" cy="200" r="20" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="200" r="12" fill="#D98324"/><text x="340" y="200" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#3A2406">4</text></g>
+<g class="dot" id="g6" transform="translate(-120,0)"><circle class="halo" id="h6" cx="340" cy="275" r="20" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="275" r="12" fill="#1D9E75"/><text x="340" y="275" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">6</text></g>
+</svg>
+
+<div id="summary" style="background:var(--color-background-danger);color:var(--color-text-danger)">2 blockers: Access to real data, Private / isolated models</div>
+
+<div class="toolbar">
+<button id="reset">Reset to typical org</button>
+<button id="copy">Copy my results</button>
+</div>
+
+<div id="controls">
+<div class="row"><div class="chip" style="background:#C0392B;color:#fff">1</div><div class="meta"><div class="nm">Access to real data</div><div class="ct">Context · high impact</div></div><div class="seg" data-n="1"><button data-v="not" class="active">Not in place</button><button data-v="partial">Partial</button><button data-v="in">In place</button></div></div>
+<div class="row"><div class="chip" style="background:#D98324;color:#3A2406">2</div><div class="meta"><div class="nm">Institutional knowledge &amp; context</div><div class="ct">Context · medium impact</div></div><div class="seg" data-n="2"><button data-v="not" class="active">Not in place</button><button data-v="partial">Partial</button><button data-v="in">In place</button></div></div>
+<div class="row"><div class="chip" style="background:#C0392B;color:#fff">3</div><div class="meta"><div class="nm">Data stays inside firewall</div><div class="ct">Control · high impact</div></div><div class="seg" data-n="3"><button data-v="not">Not in place</button><button data-v="partial">Partial</button><button data-v="in" class="active">In place</button></div></div>
+<div class="row"><div class="chip" style="background:#D98324;color:#3A2406">4</div><div class="meta"><div class="nm">Granular permissions &amp; audit</div><div class="ct">Control · medium impact</div></div><div class="seg" data-n="4"><button data-v="not">Not in place</button><button data-v="partial" class="active">Partial</button><button data-v="in">In place</button></div></div>
+<div class="row"><div class="chip" style="background:#C0392B;color:#fff">5</div><div class="meta"><div class="nm">Private / isolated models</div><div class="ct">Control · high impact</div></div><div class="seg" data-n="5"><button data-v="not" class="active">Not in place</button><button data-v="partial">Partial</button><button data-v="in">In place</button></div></div>
+<div class="row"><div class="chip" style="background:#1D9E75;color:#fff">6</div><div class="meta"><div class="nm">Open, swappable frameworks</div><div class="ct">Choice · low impact</div></div><div class="seg" data-n="6"><button data-v="not" class="active">Not in place</button><button data-v="partial">Partial</button><button data-v="in">In place</button></div></div>
+</div>
+
+<footer>
+<div class="mark">Keywell.ai<span>.</span></div>
+<div style="margin-top:4px">Databricks-native AI scaffolding for healthcare and human services.</div>
+</footer>
+</div>
+
+<script>
+const META={1:{name:'Access to real data',impact:'high'},2:{name:'Institutional knowledge & context',impact:'med'},3:{name:'Data stays inside firewall',impact:'high'},4:{name:'Granular permissions & audit',impact:'med'},5:{name:'Private / isolated models',impact:'high'},6:{name:'Open, swappable frameworks',impact:'low'}};
+const DEFAULTS={1:'not',2:'not',3:'in',4:'partial',5:'not',6:'not'};
+const DX={not:-120,partial:0,in:120};
+const LAB={not:'not in place',partial:'partial',in:'in place'};
+let state=Object.assign({},DEFAULTS);
+
+function render(){
+  for(let n=1;n<=6;n++){
+    const v=state[n];
+    document.getElementById('g'+n).setAttribute('transform','translate('+DX[v]+',0)');
+    const isBlock=META[n].impact==='high'&&v==='not';
+    document.getElementById('h'+n).classList.toggle('on',isBlock);
+    document.querySelectorAll('.seg[data-n="'+n+'"] button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
+  }
+  const blockers=[],atrisk=[];
+  for(let n=1;n<=6;n++){ if(META[n].impact==='high'){ if(state[n]==='not') blockers.push(META[n].name); else if(state[n]==='partial') atrisk.push(META[n].name);} }
+  const el=document.getElementById('summary');
+  if(blockers.length>0){
+    el.style.background='var(--color-background-danger)';el.style.color='var(--color-text-danger)';
+    el.textContent=blockers.length+(blockers.length===1?' blocker: ':' blockers: ')+blockers.join(', ')+(atrisk.length?'  ·  still to firm up: '+atrisk.join(', '):'');
+  } else {
+    el.style.background='var(--color-background-success)';el.style.color='var(--color-text-success)';
+    el.textContent=atrisk.length?'No hard blockers. Still to firm up: '+atrisk.join(', '):'No blockers. Every high-impact capability is in place.';
+  }
+}
+
+function resultsText(){
+  const lines=[];
+  for(let n=1;n<=6;n++){lines.push(n+'. '+META[n].name+' ('+META[n].impact+' impact): '+LAB[state[n]]);}
+  const blockers=[];
+  for(let n=1;n<=6;n++){ if(META[n].impact==='high'&&state[n]==='not') blockers.push(META[n].name); }
+  const head='AI-readiness self-audit — '+(blockers.length?blockers.length+' blocker(s): '+blockers.join(', '):'no blockers flagged');
+  return head+'\n\n'+lines.join('\n');
+}
+
+document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{state[b.closest('.seg').dataset.n]=b.dataset.v;render();}));
+document.getElementById('reset').addEventListener('click',()=>{state=Object.assign({},DEFAULTS);render();});
+document.getElementById('copy').addEventListener('click',()=>{
+  const btn=document.getElementById('copy');
+  const txt=resultsText();
+  const done=()=>{const o=btn.textContent;btn.textContent='Copied';setTimeout(()=>btn.textContent=o,1500);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(done);}
+  else{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);done();}
+});
+render();
+</script>
+</body>
+</html>
