@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Healthcare AI Diagnostic — Keywell.ai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --text-primary:#1f2024;
+  --text-secondary:#5b5e66;
+  --text-tertiary:#8a8d94;
+  --bg-secondary:#f4f4f2;
+  --border-tertiary:rgba(0,0,0,0.10);
+  --border-secondary:rgba(0,0,0,0.18);
+  --bg-danger:#fdecea;
+  --text-danger:#9b2f23;
+  --bg-success:#e7f4ee;
+  --text-success:#1d6e56;
+  --radius-md:8px;
+  --radius-lg:12px;
+  --font:'Work Sans',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --font-head:'Josefin Sans',var(--font);
+  --coral:#E8705A;
+  --ink:#1f2024;
+  --imp-high:#2D2F6E;
+  --imp-med:#4F60AC;
+  --imp-low:#BCC5E8;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#fafaf8;color:var(--text-primary);font-family:var(--font);line-height:1.6}
+.wrap{max-width:800px;margin:0 auto;padding:0 20px 56px}
+.rule{height:3px;background:var(--coral)}
+header{padding:28px 0 4px}
+.eyebrow{font-family:var(--font-head);font-size:13px;font-weight:500;letter-spacing:3px;color:var(--coral);text-transform:uppercase;margin:0 0 6px}
+h1{font-family:var(--font-head);font-weight:400;font-size:34px;line-height:1.1;margin:0 0 12px;color:var(--text-primary)}
+.lede{font-size:15px;color:var(--text-secondary);margin:0;max-width:66ch}
+svg{display:block;width:100%;height:auto;margin:8px 0 0}
+.key{display:flex;flex-wrap:wrap;gap:24px;padding:14px 16px;margin:6px 0 4px;background:var(--bg-secondary);border-radius:var(--radius-lg);font-size:13px}
+.key h3{font-family:var(--font);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-tertiary);margin:0 0 8px;font-weight:500}
+.key .items{display:flex;flex-direction:column;gap:6px}
+.key .it{display:flex;align-items:center;gap:9px;color:var(--text-secondary)}
+.key .it .sw{flex:none;border-radius:50%;display:inline-block}
+#summary{margin:14px 0;padding:12px 14px;border-radius:var(--radius-lg);font-size:14px}
+.toolbar{display:flex;gap:10px;margin:0 0 4px;flex-wrap:wrap}
+button{font-family:var(--font);font-size:13px;padding:6px 14px;border:0.5px solid var(--border-secondary);background:transparent;color:var(--text-primary);border-radius:var(--radius-md);cursor:pointer;transition:background .15s,transform .05s}
+button:hover{background:var(--bg-secondary)}
+button:active{transform:scale(0.98)}
+.row{display:flex;align-items:center;gap:12px;padding:9px 0;border-top:0.5px solid var(--border-tertiary)}
+.chip{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex:none}
+.chip.imp-high{background:var(--imp-high);color:#fff}
+.chip.imp-med{background:var(--imp-med);color:#fff}
+.chip.imp-low{background:var(--imp-low);color:var(--ink)}
+.meta{flex:1;min-width:0}
+.nm{font-size:14px;color:var(--text-primary)}
+.ct{font-size:12px;color:var(--text-secondary)}
+.seg{display:inline-flex;border:0.5px solid var(--border-secondary);border-radius:var(--radius-md);overflow:hidden;flex:none}
+.seg button{border:none;border-radius:0;padding:5px 10px;font-size:12px;color:var(--text-secondary);border-right:0.5px solid var(--border-tertiary)}
+.seg button:last-child{border-right:none}
+.seg button.active{background:var(--bg-secondary);color:var(--text-primary);font-weight:500}
+footer{margin-top:32px;padding-top:16px;border-top:0.5px solid var(--border-tertiary);font-size:13px;color:var(--text-secondary)}
+.mark{font-family:var(--font-head);font-size:16px;color:var(--text-primary)}
+.mark span{color:var(--coral)}
+.dot-g{transition:transform .35s ease}
+.halo{opacity:0;transition:opacity .3s}
+.halo.on{opacity:.5}
+@media (prefers-reduced-motion: no-preference){.halo.on{animation:pulse 1.9s ease-in-out infinite}}
+@keyframes pulse{0%,100%{opacity:.28}50%{opacity:.62}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+@media (max-width:560px){.row{flex-wrap:wrap}.seg{margin-left:38px}h1{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="rule"></div>
+<div class="wrap">
+<header>
+  <p class="eyebrow">AI-production ready self-audit</p>
+  <h1>Healthcare AI Diagnostic</h1>
+  <p class="lede">Set each capability to where you actually are. High and medium-impact items that are not in place land in the Blockers corner, the gap between you and AI in production. Darker blue means higher impact and more urgent to address.</p>
+</header>
+
+<h2 class="sr-only">Interactive AI-readiness matrix. Set each capability to not in place, partial, or in place. High and medium-impact items that are not in place are counted as blockers.</h2>
+
+<svg viewBox="0 0 680 470" role="img">
+<title>Healthcare AI diagnostic matrix: impact on production versus maturity</title>
+<desc>Ten capabilities plotted by impact (vertical) and maturity (horizontal). High and medium-impact items set to not in place sit in the top-left Blockers corner.</desc>
+<rect x="80" y="55" width="260" height="180" fill="#C0392B" opacity="0.09"/>
+<rect x="80" y="55" width="520" height="375" fill="none" stroke="var(--border-secondary)" stroke-width="0.5"/>
+<line x1="340" y1="55" x2="340" y2="430" stroke="var(--border-tertiary)" stroke-width="0.75" stroke-dasharray="4 4"/>
+<line x1="80" y1="235" x2="600" y2="235" stroke="var(--border-tertiary)" stroke-width="0.75" stroke-dasharray="4 4"/>
+<text x="88" y="70" font-size="12" fill="var(--text-tertiary)">Blockers</text>
+<text x="592" y="70" font-size="12" fill="var(--text-tertiary)" text-anchor="end">Table stakes</text>
+<text x="88" y="421" font-size="12" fill="var(--text-tertiary)">Future-proofing</text>
+<text x="592" y="421" font-size="12" fill="var(--text-tertiary)" text-anchor="end">Solved</text>
+<text x="14" y="68" font-size="11" fill="var(--text-secondary)">High impact</text>
+<text x="14" y="420" font-size="11" fill="var(--text-secondary)">Low impact</text>
+<text x="80" y="452" font-size="11" fill="var(--text-secondary)">Not in place</text>
+<text x="600" y="452" font-size="11" fill="var(--text-secondary)" text-anchor="end">In place</text>
+
+<g class="dot-g" id="g7" transform="translate(140,0)"><circle class="halo" id="h7" cx="340" cy="72" r="15" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="72" r="10" fill="#2D2F6E"/><text x="340" y="72" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">7</text></g>
+<g class="dot-g" id="g5" transform="translate(0,0)"><circle class="halo" id="h5" cx="340" cy="94" r="15" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="94" r="10" fill="#2D2F6E"/><text x="340" y="94" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">5</text></g>
+<g class="dot-g" id="g1" transform="translate(-140,0)"><circle class="halo" id="h1" cx="340" cy="116" r="15" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="116" r="10" fill="#4F60AC"/><text x="340" y="116" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">1</text></g>
+<g class="dot-g" id="g6" transform="translate(-140,0)"><circle class="halo" id="h6" cx="340" cy="138" r="15" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="138" r="10" fill="#4F60AC"/><text x="340" y="138" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">6</text></g>
+<g class="dot-g" id="g4" transform="translate(0,0)"><circle class="halo" id="h4" cx="340" cy="160" r="15" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="160" r="10" fill="#4F60AC"/><text x="340" y="160" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">4</text></g>
+<g class="dot-g" id="g9" transform="translate(140,0)"><circle class="halo" id="h9" cx="340" cy="182" r="15" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="182" r="10" fill="#4F60AC"/><text x="340" y="182" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">9</text></g>
+<g class="dot-g" id="g10" transform="translate(140,0)"><circle class="halo" id="h10" cx="340" cy="204" r="15" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="204" r="10" fill="#4F60AC"/><text x="340" y="204" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">10</text></g>
+<g class="dot-g" id="g2" transform="translate(0,0)"><circle class="halo" id="h2" cx="340" cy="226" r="15" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="226" r="10" fill="#4F60AC"/><text x="340" y="226" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">2</text></g>
+<g class="dot-g" id="g8" transform="translate(-140,0)"><circle class="halo" id="h8" cx="340" cy="300" r="15" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="300" r="10" fill="#BCC5E8"/><text x="340" y="300" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#1f2024">8</text></g>
+<g class="dot-g" id="g3" transform="translate(-140,0)"><circle class="halo" id="h3" cx="340" cy="375" r="15" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="340" cy="375" r="10" fill="#BCC5E8"/><text x="340" y="375" dy=".34em" text-anchor="middle" font-size="12" font-weight="500" fill="#1f2024">3</text></g>
+</svg>
+
+<div class="key">
+  <div>
+    <h3>Color = impact on production</h3>
+    <div class="items">
+      <span class="it"><span class="sw" style="width:16px;height:16px;background:var(--imp-high)"></span>High, address first</span>
+      <span class="it"><span class="sw" style="width:16px;height:16px;background:var(--imp-med)"></span>Medium</span>
+      <span class="it"><span class="sw" style="width:16px;height:16px;background:var(--imp-low)"></span>Low</span>
+    </div>
+  </div>
+</div>
+
+<div id="summary" style="background:var(--bg-danger);color:var(--text-danger)">2 blockers: Access to real data, Guardrails  ·  still to firm up: Granular permissions, Data stays in place, Institutional knowledge</div>
+
+<div class="toolbar">
+<button id="reset">Reset to typical org</button>
+<button id="copy">Copy my results</button>
+</div>
+
+<div id="controls">
+<div class="row"><div class="chip imp-med">1</div><div class="meta"><div class="nm">Access to real data</div><div class="ct">Context · medium impact</div></div><div class="seg" data-n="1"><button data-v="not" class="active">Not in place</button><button data-v="partial">Partial</button><button data-v="in">In place</button></div></div>
+<div class="row"><div class="chip imp-med">2</div><div class="meta"><div class="nm">Institutional knowledge</div><div class="ct">Context · medium impact</div></div><div class="seg" data-n="2"><button data-v="not">Not in place</button><button data-v="partial" class="active">Partial</button><button data-v="in">In place</button></div></div>
+<div class="row"><div class="chip imp-low">3</div><div class="meta"><div class="nm">Semantic layer</div><div class="ct">Context · low impact</div></div><div class="seg" data-n="3"><button data-v="not" class="active">Not in place</button><button data-v="partial">Partial</button><button data-v="in">In place</button></div></div>
+<div class="row"><div class="chip imp-med">4</div><div class="meta"><div class="nm">Data stays in place</div><div class="ct">Control · medium impact</div></div><div class="seg" data-n="4"><button data-v="not">Not in place</button><button data-v="partial" class="active">Partial</button><button data-v="in">In place</button></div></div>
+<div class="row"><div class="chip imp-high">5</div><div class="meta"><div class="nm">Granular permissions</div><div class="ct">Control · high impact</div></div><div class="seg" data-n="5"><button data-v="not">Not in place</button><button data-v="partial" class="active">Partial</button><button data-v="in">In place</button></div></div>
+<div class="row"><div class="chip imp-med">6</div><div class="meta"><div class="nm">Guardrails</div><div class="ct">Control · medium impact</div></div><div class="seg" data-n="6"><button data-v="not" class="active">Not in place</button><button data-v="partial">Partial</button><button data-v="in">In place</button></div></div>
+<div class="row"><div class="chip imp-high">7</div><div class="meta"><div class="nm">Private / isolated LLMs</div><div class="ct">Control · high impact</div></div><div class="seg" data-n="7"><button data-v="not">Not in place</button><button data-v="partial">Partial</button><button data-v="in" class="active">In place</button></div></div>
+<div class="row"><div class="chip imp-low">8</div><div class="meta"><div class="nm">Swappable LLMs &amp; data</div><div class="ct">Choice · low impact</div></div><div class="seg" data-n="8"><button data-v="not" class="active">Not in place</button><button data-v="partial">Partial</button><button data-v="in">In place</button></div></div>
+<div class="row"><div class="chip imp-med">9</div><div class="meta"><div class="nm">Data &amp; AI sovereignty</div><div class="ct">Choice · medium impact</div></div><div class="seg" data-n="9"><button data-v="not">Not in place</button><button data-v="partial">Partial</button><button data-v="in" class="active">In place</button></div></div>
+<div class="row"><div class="chip imp-med">10</div><div class="meta"><div class="nm">Open frameworks</div><div class="ct">Choice · medium impact</div></div><div class="seg" data-n="10"><button data-v="not">Not in place</button><button data-v="partial">Partial</button><button data-v="in" class="active">In place</button></div></div>
+</div>
+
+<footer>
+<div class="mark">Keywell.ai<span>.</span></div>
+<div style="margin-top:4px">Databricks-native AI scaffolding for healthcare and human services.</div>
+</footer>
+</div>
+
+<script>
+const META={
+ 1:{name:'Access to real data',impact:'medium'},
+ 2:{name:'Institutional knowledge',impact:'medium'},
+ 3:{name:'Semantic layer',impact:'low'},
+ 4:{name:'Data stays in place',impact:'medium'},
+ 5:{name:'Granular permissions',impact:'high'},
+ 6:{name:'Guardrails',impact:'medium'},
+ 7:{name:'Private / isolated LLMs',impact:'high'},
+ 8:{name:'Swappable LLMs & data',impact:'low'},
+ 9:{name:'Data & AI sovereignty',impact:'medium'},
+ 10:{name:'Open frameworks',impact:'medium'}
+};
+const DEFAULTS={1:'not',2:'partial',3:'not',4:'partial',5:'partial',6:'not',7:'in',8:'not',9:'in',10:'in'};
+const DX={not:-140,partial:0,in:140};
+const LAB={not:'not in place',partial:'partial',in:'in place'};
+const eligible=n=>META[n].impact!=='low';
+let state=Object.assign({},DEFAULTS);
+
+function render(){
+  for(let n=1;n<=10;n++){
+    const v=state[n];
+    document.getElementById('g'+n).setAttribute('transform','translate('+DX[v]+',0)');
+    const isBlock=eligible(n)&&v==='not';
+    document.getElementById('h'+n).classList.toggle('on',isBlock);
+    document.querySelectorAll('.seg[data-n="'+n+'"] button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
+  }
+  const blockers=[],atrisk=[];
+  for(let n=1;n<=10;n++){ if(eligible(n)){ if(state[n]==='not') blockers.push(META[n].name); else if(state[n]==='partial') atrisk.push(META[n].name);} }
+  const el=document.getElementById('summary');
+  if(blockers.length>0){
+    el.style.background='var(--bg-danger)';el.style.color='var(--text-danger)';
+    el.textContent=blockers.length+(blockers.length===1?' blocker: ':' blockers: ')+blockers.join(', ')+(atrisk.length?'  ·  still to firm up: '+atrisk.join(', '):'');
+  } else {
+    el.style.background='var(--bg-success)';el.style.color='var(--text-success)';
+    el.textContent=atrisk.length?'No blockers. Still to firm up: '+atrisk.join(', '):'No blockers. Every high and medium-impact capability is in place.';
+  }
+}
+
+function resultsText(){
+  const lines=[];
+  for(let n=1;n<=10;n++){lines.push(n+'. '+META[n].name+' ('+META[n].impact+' impact): '+LAB[state[n]]);}
+  const blockers=[];
+  for(let n=1;n<=10;n++){ if(eligible(n)&&state[n]==='not') blockers.push(META[n].name); }
+  const head='Healthcare AI Diagnostic — '+(blockers.length?blockers.length+' blocker(s): '+blockers.join(', '):'no blockers flagged');
+  return head+'\n\n'+lines.join('\n');
+}
+
+document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{state[b.closest('.seg').dataset.n]=b.dataset.v;render();}));
+document.getElementById('reset').addEventListener('click',()=>{state=Object.assign({},DEFAULTS);render();});
+document.getElementById('copy').addEventListener('click',()=>{
+  const btn=document.getElementById('copy');
+  const txt=resultsText();
+  const done=()=>{const o=btn.textContent;btn.textContent='Copied';setTimeout(()=>btn.textContent=o,1500);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(done);}
+  else{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);done();}
+});
+render();
+</script>
+</body>
+</html>
